@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Social Media Data Map</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <style>
+        /* Replace the following style with your desired map size */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Social Media Data Map</h1>
+    <div id="map"></div>
+    <div class="footer">
+        <p>&copy; BRIAN OMAMBIA / ENC221-0107/2018</p>
+    </div>
+    <script>
+        // Replace the following coordinates with the center point of your map
+        const mapCenter = [37.0902, -95.7129];
+
+        // Initialize the map
+        const map = L.map('map').setView(mapCenter, 2);
+
+        // Add the OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Array of people and their tweet information
+        const people = [
+            {
+                location: [43.651070, -79.347015], // Toronto, Canada
+                name: 'JSpitTrades',
+                tweetLink: 'https://twitter.com/JSpitTrades/status/1692381501470429447?s=20'
+            },
+            {
+                location: [40.4406, -79.9959], // Pittsburgh, United States
+                name: 'DailyLoud',
+                tweetLink: 'https://twitter.com/DailyLoud/status/1692393384516669767?s=20'
+            },
+            {
+                location: [-23.4014, 29.4189], // Limpopo, South Africa
+                name: 'Julius Malema',
+                tweetLink: 'https://twitter.com/Julius_S_Malema/status/1689495091260366848?s=20'
+            },
+            {
+                location: [-14.2350, -51.9253], // Brazil
+                name: 'Neymar Jr',
+                tweetLink: 'https://twitter.com/Alhilal_EN/status/1691545577123696640?s=20'
+            },
+            {
+                location: [48.8566, 2.3522], // Paris, France
+                name: 'Kylian Mbappé',
+                tweetLink: 'https://twitter.com/KMbappe/status/1683557510907678720?s=20'
+            },
+            {
+                location: [34.6937, 135.5023], // Osaka, Japan (Kai Cenat)
+                name: 'Kai Cenat',
+                tweetLink: 'https://twitter.com/Quixzix/status/1680672889560002561?s=20'
+            },
+            {
+                location: [34.6937, 135.5023], // Osaka, Japan (iShowSpeed)
+                name: 'iShowSpeed',
+                tweetLink: 'https://twitter.com/ishowspeedsui/status/1685865534792065025?s=20'
+            }
+            // Add more people as needed
+        ];
+
+        // Create markers for each person's location
+        people.forEach(person => {
+            const marker = L.marker(person.location).addTo(map);
+            const popupContent = `
+                <b>${person.name}</b><br>
+                <a href="${person.tweetLink}" target="_blank">View Tweet</a>`;
+            marker.bindPopup(popupContent);
+        });
+    </script>
+</body>
+</html>
